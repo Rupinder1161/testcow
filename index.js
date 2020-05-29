@@ -1,7 +1,10 @@
 const express = require('express')
 const cowsay = require('cowsay')
-const cors = require('cors')// Create the server
-const app = express()// Serve our api route /cow that returns a custom talking text cow
+const cors = require('cors')
+
+// Create the server
+const app = express()
+// Serve our api route /cow that returns a custom talking text cow
 app.get('/api/cow/:say', cors(), async (req, res, next) => {
   try {
     const text = req.params.say
