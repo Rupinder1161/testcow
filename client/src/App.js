@@ -4,7 +4,8 @@ import './App.css'
 class App extends Component {
   state = {
     cow: '',
-    text: ''
+    text: '',
+    cool:'',
   }
   componentDidMount() {
     this.fetchCow()
@@ -23,8 +24,21 @@ class App extends Component {
     const cow = custom.moo
     this.setState({ cow, text: '' })
   }
+
+  Hello = async evt => {
+    evt.preventDefault()
+    const cool = this.state.cool
+    const response = await fetch(`/api/cow/${cool}`)
+    const custom = await response.json()
+    const cow = custom.moo
+    this.setState({ cow, text: '' ,cool:''})
+  }
   handleChange = evt => {
     this.setState({ [evt.target.name]: evt.target.value })
+    console.log(this.state.text)
+  }
+  handleChangee = evt => {
+    this.setState({ [evt.target.name]: evt.target.value})
     console.log(this.state.text)
   }
   render() {
@@ -39,6 +53,16 @@ class App extends Component {
             name="text"
             value={this.state.text}
             onChange={this.handleChange}
+          />
+          <button type="submit">Show me a talking cow!</button>
+        </form>
+        <form onSubmit={this.Hello}>
+          <label>Custom Cow Text:</label>
+          <input
+            type="text"
+            name="cool"
+            value={this.state.cool}
+            onChange={this.handleChangee}
           />
           <button type="submit">Show me a talking cow!</button>
         </form>
